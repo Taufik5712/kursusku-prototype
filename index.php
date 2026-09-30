@@ -1,11 +1,11 @@
 <?php
 /**
- * index.php - Landing Page KursusKu (Versi 1 / Milestone 2)
+ * index.php - Landing Page + Katalog Data-Driven KursusKu (Milestone 2 & 4)
  * Pemrograman Web III - PHP & MySQL
  *
- * Berisi nilai PHP sederhana (site name, tagline, tahun) yang ditampilkan
- * ke dalam struktur HTML semantik. Fokus pertemuan ini: struktur halaman
- * dan pembuktian bahwa PHP diproses di server, bukan visual/CSS kompleks.
+ * Sejak Pertemuan 5, header/nav/footer memakai kelas dari assets/css/style.css
+ * (site-header, nav-wrap, brand, container) agar tampilan konsisten dengan
+ * registration.php dan process-registration.php.
  */
 
 require_once __DIR__ . '/helpers.php';      // 4 function reusable (Milestone 4)
@@ -21,181 +21,31 @@ $year     = date('Y');
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= htmlspecialchars($siteName) ?> - Landing Page</title>
-  <style>
-    /* Styling dasar & rapi - sengaja dibuat sederhana, bukan CSS kompleks */
-    :root {
-      --primary: #2563eb;
-      --dark: #111827;
-      --muted: #6b7280;
-      --bg-light: #f9fafb;
-      --border: #e5e7eb;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      color: var(--dark);
-      line-height: 1.6;
-    }
-    header {
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-    }
-    nav {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 24px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    nav a {
-      color: var(--dark);
-      text-decoration: none;
-      margin-left: 20px;
-      font-size: 0.95rem;
-    }
-    nav a:first-child { margin-left: 0; font-size: 1.1rem; }
-    nav a:hover { color: var(--primary); }
-
-    main { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
-
-    #hero {
-      text-align: center;
-      padding: 64px 16px;
-    }
-    #hero h1 {
-      font-size: 2rem;
-      margin-bottom: 12px;
-    }
-    #hero p { color: var(--muted); max-width: 560px; margin: 0 auto 24px; }
-    #hero a {
-      display: inline-block;
-      background: var(--primary);
-      color: #fff;
-      padding: 12px 24px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-      margin: 0 6px;
-    }
-    #hero a.secondary {
-      background: #fff;
-      color: var(--primary);
-      border: 1px solid var(--primary);
-    }
-
-    section { padding: 48px 0; }
-    section h2 {
-      text-align: center;
-      margin-bottom: 32px;
-      font-size: 1.5rem;
-    }
-
-    #keunggulan article, #katalog article {
-      display: inline-block;
-      vertical-align: top;
-      width: 100%;
-      max-width: 300px;
-      margin: 0 12px 24px 0;
-      padding: 20px;
-      background: var(--bg-light);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-    }
-    #keunggulan, #katalog { text-align: center; }
-    #keunggulan article h3, #katalog article h3 {
-      margin-top: 0;
-      color: var(--primary);
-    }
-
-    /* --- Tabel katalog (Milestone 4) --- */
-    .section-note { text-align: center; color: var(--muted); margin: -20px 0 24px; font-size: .92rem; }
-    .table-wrap { overflow-x: auto; }
-    table.catalog {
-      width: 100%;
-      border-collapse: collapse;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: .94rem;
-      text-align: left;
-    }
-    table.catalog th, table.catalog td {
-      padding: 12px 14px;
-      border-bottom: 1px solid var(--border);
-    }
-    table.catalog thead th {
-      background: var(--bg-light);
-      font-size: .8rem;
-      text-transform: uppercase;
-      letter-spacing: .03em;
-      color: var(--muted);
-    }
-    table.catalog tbody tr:last-child td { border-bottom: none; }
-    table.catalog .num { text-align: right; }
-    table.catalog code {
-      background: var(--bg-light);
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-size: .85rem;
-    }
-    .badge-available, .badge-full {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: .8rem;
-      white-space: nowrap;
-    }
-    .badge-available { background: #e7f8ef; color: #146c43; }
-    .badge-full      { background: #fdeaea; color: #a61b1b; }
-
-    #alur ol { max-width: 480px; margin: 0 auto; padding-left: 20px; }
-    #alur li { margin-bottom: 8px; }
-
-    #media { text-align: center; background: var(--bg-light); border-radius: 8px; }
-    #media img, #media video { max-width: 100%; height: auto; border-radius: 8px; }
-    #media h3 { margin-top: 32px; }
-    #media a { color: var(--primary); }
-
-    #kontak { text-align: center; }
-
-    footer {
-      text-align: center;
-      padding: 24px;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      margin-top: 32px;
-      font-size: 0.9rem;
-    }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/home.css">
 </head>
 <body>
 
-<header>
-  <nav aria-label="Navigasi utama">
-    <a href="index.php"><strong><?= htmlspecialchars($siteName) ?></strong></a>
-    <span>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="brand" href="index.php"><?= htmlspecialchars($siteName) ?></a>
+    <nav aria-label="Navigasi utama">
       <a href="#keunggulan">Keunggulan</a>
       <a href="#katalog">Katalog</a>
       <a href="#alur">Cara Daftar</a>
       <a href="fee-calculator.php">Estimasi Biaya</a>
+      <a href="registration.php">Daftar Kursus</a>
       <a href="#kontak">Kontak</a>
-    </span>
-  </nav>
+    </nav>
+  </div>
 </header>
 
-<main>
+<main class="container">
 
   <section id="hero">
     <h1><?= htmlspecialchars($tagline) ?></h1>
     <p>Temukan kursus teknologi yang relevan untuk meningkatkan keterampilan Anda.</p>
-    <a href="#katalog">Lihat Katalog Kursus</a>
+    <a href="registration.php">Daftar Sekarang</a>
     <a class="secondary" href="fee-calculator.php">Lihat Estimasi Biaya</a>
   </section>
 
@@ -262,6 +112,9 @@ $year     = date('Y');
       <li>Periksa kembali data.</li>
       <li>Kirim pendaftaran dan tunggu konfirmasi.</li>
     </ol>
+    <p style="text-align:center;">
+      <a class="btn-link" href="registration.php">Buka Form Pendaftaran</a>
+    </p>
   </section>
 
   <section id="media">
@@ -291,7 +144,7 @@ $year     = date('Y');
 
 </main>
 
-<footer>
+<footer class="site-footer">
   <small>&copy; <?= $year ?> <?= htmlspecialchars($siteName) ?></small>
 </footer>
 

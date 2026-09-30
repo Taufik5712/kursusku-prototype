@@ -1,0 +1,114 @@
+/* ==========================================================================
+   home.css - Style khusus index.php (hero, keunggulan, katalog, media)
+   Dipisah dari style.css agar style.css tetap berisi aturan GLOBAL saja
+   (navbar, form, card, button) yang dipakai di semua halaman, sementara
+   file ini hanya dipakai oleh landing page.
+   Variabel warna (--brand, --text, --muted, --line, --soft) diambil dari
+   style.css supaya satu palet dipakai di seluruh proyek.
+   ========================================================================== */
+
+main.container { padding-top: 8px; }
+
+#hero {
+  text-align: center;
+  padding: 56px 16px 40px;
+}
+#hero h1 { font-size: 2rem; margin-bottom: 12px; }
+#hero p { color: var(--muted); max-width: 560px; margin: 0 auto 24px; }
+#hero a {
+  display: inline-block;
+  background: var(--brand);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: .65rem;
+  text-decoration: none;
+  font-weight: 700;
+  margin: 6px;
+}
+#hero a.secondary {
+  background: #fff;
+  color: var(--brand-dark);
+  border: 1px solid var(--brand);
+}
+
+section { padding: 40px 0; }
+section h2 { text-align: center; margin-bottom: 28px; font-size: 1.5rem; }
+
+#keunggulan { text-align: center; }
+#keunggulan article {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 12px 24px 0;
+  padding: 20px;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  text-align: left;
+}
+#keunggulan article h3 { margin-top: 0; color: var(--brand-dark); }
+
+/* --- Tabel katalog (Milestone 4) --- */
+.section-note { text-align: center; color: var(--muted); margin: -18px 0 24px; font-size: .92rem; }
+.table-wrap { overflow-x: auto; }
+table.catalog {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  font-size: .94rem;
+  text-align: left;
+}
+table.catalog th, table.catalog td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+}
+table.catalog thead th {
+  background: var(--soft);
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  color: var(--muted);
+}
+table.catalog tbody tr:last-child td { border-bottom: none; }
+table.catalog .num { text-align: right; }
+table.catalog code {
+  background: var(--soft);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: .85rem;
+}
+.badge-available, .badge-full {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .8rem;
+  white-space: nowrap;
+}
+.badge-available { background: #e7f8ef; color: #146c43; }
+.badge-full      { background: #fdeaea; color: #a61b1b; }
+
+#alur ol { max-width: 480px; margin: 0 auto; padding-left: 20px; }
+#alur li { margin-bottom: 8px; }
+
+#media { text-align: center; background: var(--soft); border-radius: 1rem; }
+#media img, #media video { max-width: 100%; height: auto; border-radius: .75rem; }
+#media h3 { margin-top: 32px; }
+
+#kontak { text-align: center; }
+
+.site-footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+  #keunggulan article { max-width: 100%; margin-right: 0; display: block; }
+}

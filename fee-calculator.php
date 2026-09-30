@@ -47,61 +47,7 @@ $testCases = [
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kalkulator Estimasi Biaya - <?= htmlspecialchars($courseName) ?></title>
-  <style>
-    :root {
-      --primary: #2563eb;
-      --dark: #111827;
-      --muted: #6b7280;
-      --bg: #f9fafb;
-      --border: #e5e7eb;
-      --pass: #16a34a;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 32px 16px;
-      background: var(--bg);
-      color: var(--dark);
-      font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      line-height: 1.6;
-    }
-    .card {
-      max-width: 760px;
-      margin: 0 auto 24px;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 28px;
-    }
-    h1 { font-size: 1.6rem; margin: 0 0 4px; }
-    h2 { font-size: 1.15rem; margin: 0 0 16px; }
-    .subtitle { color: var(--muted); margin: 0 0 24px; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-    th, td { border-bottom: 1px solid var(--border); padding: 10px 8px; text-align: left; }
-    thead th { background: var(--bg); font-size: 0.85rem; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
-    td.num, th.num { text-align: right; }
-    tr.total td { background: #eff6ff; font-weight: 700; border-bottom: none; }
-    .badge {
-      display: inline-block;
-      background: #dcfce7;
-      color: var(--pass);
-      font-weight: 600;
-      font-size: 0.8rem;
-      padding: 2px 10px;
-      border-radius: 999px;
-    }
-    .formula {
-      background: var(--bg);
-      border-left: 3px solid var(--primary);
-      padding: 12px 16px;
-      font-family: ui-monospace, Consolas, monospace;
-      font-size: 0.88rem;
-      margin: 0 0 20px;
-      overflow-x: auto;
-    }
-    .back { display: inline-block; margin-top: 20px; color: var(--primary); text-decoration: none; font-weight: 600; }
-    .note { color: var(--muted); font-size: 0.88rem; }
-  </style>
+  <link rel="stylesheet" href="assets/css/fee-calculator.css">
 </head>
 <body>
 
