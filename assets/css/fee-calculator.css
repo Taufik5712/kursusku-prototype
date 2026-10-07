@@ -1,57 +1,142 @@
 /* ==========================================================================
-   fee-calculator.css - Style khusus fee-calculator.php
+   fee-calculator.css - Style khusus fee-calculator.php (Sleek Modern UI)
    ========================================================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
 :root {
-  --primary: #2563eb;
-  --dark: #111827;
-  --muted: #6b7280;
-  --bg: #f9fafb;
-  --border: #e5e7eb;
-  --pass: #16a34a;
+  --bg-dark: #0b0f19;
+  --bg-card: rgba(22, 30, 49, 0.75);
+  --accent-primary: #6366f1;
+  --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --shadow-main: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-* { box-sizing: border-box; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-  margin: 0;
-  padding: 32px 16px;
-  background: var(--bg);
-  color: var(--dark);
-  font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
   line-height: 1.6;
+  min-height: 100vh;
+  padding: 3rem 1.5rem;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.18) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.18) 0px, transparent 50%);
+  background-attachment: fixed;
 }
+
 .card {
-  max-width: 760px;
-  margin: 0 auto 24px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 28px;
+  max-width: 850px;
+  margin: 0 auto 2.5rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-main);
 }
-h1 { font-size: 1.6rem; margin: 0 0 4px; }
-h2 { font-size: 1.15rem; margin: 0 0 16px; }
-.subtitle { color: var(--muted); margin: 0 0 24px; }
-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-th, td { border-bottom: 1px solid var(--border); padding: 10px 8px; text-align: left; }
-thead th { background: var(--bg); font-size: 0.85rem; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
-td.num, th.num { text-align: right; }
-tr.total td { background: #eff6ff; font-weight: 700; border-bottom: none; }
-.badge {
-  display: inline-block;
-  background: #dcfce7;
-  color: var(--pass);
-  font-weight: 600;
-  font-size: 0.8rem;
-  padding: 2px 10px;
-  border-radius: 999px;
+
+h1, h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
 .formula {
-  background: var(--bg);
-  border-left: 3px solid var(--primary);
-  padding: 12px 16px;
-  font-family: ui-monospace, Consolas, monospace;
-  font-size: 0.88rem;
-  margin: 0 0 20px;
-  overflow-x: auto;
+  background: rgba(11, 15, 25, 0.6);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  font-family: 'Fira Code', Consolas, monospace;
+  color: #38bdf8;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  line-height: 1.8;
 }
-.back { display: inline-block; margin-top: 20px; color: var(--primary); text-decoration: none; font-weight: 600; }
-.note { color: var(--muted); font-size: 0.88rem; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+th, td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.98rem;
+}
+
+th {
+  background: rgba(11, 15, 25, 0.8);
+  color: var(--text-muted);
+  text-align: left;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+tr.total td {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: #4ade80;
+  border-top: 2px solid var(--border-color);
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.note {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 1.5rem;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: inline-block;
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.back {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.back:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  transform: translateY(-2px);
+}

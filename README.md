@@ -9,11 +9,16 @@ Dijalankan melalui Laragon pada `C:\laragon\www\kursusku-prototype`.
 kursusku-prototype/
 |-- index.php                  # Landing page + katalog data-driven (Milestone 2 & 4)
 |-- fee-calculator.php         # Kalkulator estimasi biaya (Milestone 3)
-|-- helpers.php                # 4 function reusable (Milestone 4)
-|-- data-courses.php           # Array 6 kursus (Milestone 4)
+|-- helpers.php                # Function reusable Milestone 4 + Milestone 6
+|-- data-courses.php           # Array 6 kursus untuk katalog (Milestone 4)
 |-- test-functions.php         # 6 test sederhana (Milestone 4)
-|-- registration.php           # Form pendaftaran, 8 jenis kontrol (Milestone 5)
-|-- process-registration.php   # Menerima & menampilkan data $_POST (Milestone 5)
+|-- registration.php           # Form pendaftaran v1, 8 kontrol (Milestone 5, arsip)
+|-- process-registration.php   # Proses form v1 (Milestone 5, arsip)
+|-- data.php                   # Array courses ringkas, interestOptions, facilities (Milestone 6)
+|-- register.php               # Form pendaftaran lanjutan: radio/checkbox/select/textarea (Milestone 6)
+|-- process.php                # Validasi + percabangan diskon + switch + ringkasan (Milestone 6)
+|-- history.php                # Data dummy ditampilkan dengan foreach (Milestone 6)
+|-- loop-lab.php               # Latihan for, while, do-while (Milestone 6)
 |-- server-time.php            # Bukti PHP diproses server
 |-- README.md
 |-- assets/
@@ -21,15 +26,22 @@ kursusku-prototype/
 |   |   |-- style.css            # CSS global: navbar, form, card, button, alert
 |   |   |-- home.css             # Khusus index.php: hero, keunggulan, katalog, media
 |   |   |-- fee-calculator.css   # Khusus fee-calculator.php
-|   |   `-- test-functions.css   # Khusus test-functions.php
+|   |   |-- test-functions.css   # Khusus test-functions.php
+|   |   `-- week6.css            # Khusus register/process (form, ringkasan, error)/history/loop-lab.php
 |   |-- images/hero-kursus.jpg
 |   `-- video/intro-kursus.mp4
 `-- evidence/
     |-- week-02/
     |-- week-03/
     |-- week-04/
-    `-- week-05/
+    |-- week-05/
+    `-- week-06/                # README.txt, test-matrix.txt, refleksi.txt, ai-usage-log.txt + 6 screenshot
 ```
+
+> Catatan: `registration.php` & `process-registration.php` (Milestone 5) tidak
+> dihapus - tetap tersimpan sebagai arsip/evidence lama. Alur pendaftaran yang
+> AKTIF di navigasi utama sejak Milestone 6 adalah `register.php` -> `process.php`,
+> karena versi ini sudah mencakup validasi, perhitungan diskon, dan percabangan.
 
 ## Milestone 2 - Landing Page (Pertemuan 2)
 
@@ -253,3 +265,82 @@ struktur HTML dan logika PHP, dihubungkan ke CSS-nya lewat `<link rel="styleshee
 yang dipakai lebih dari satu halaman. `home.css`, `fee-calculator.css`, dan
 `test-functions.css` masing-masing hanya dipakai satu halaman, sehingga tidak
 ikut di-load oleh halaman lain yang tidak membutuhkannya.
+
+## Milestone 6 - Percabangan, Looping, Form Lanjutan (Pertemuan 6)
+
+User flow lengkap tanpa database:
+```
+index.php -> register.php -> process.php -> (ringkasan) -> history.php
+```
+
+### Percabangan (branching)
+
+`getDiscountPercent()` di `helpers.php` memakai **if/elseif**:
+
+```php
+if ($participantType === 'mahasiswa')      { return 20; }
+elseif ($participantType === 'guru')       { return 15; }
+return 0; // umum / jalur default
+```
+
+`getLearningModeLabel()` memakai **switch**, karena satu variabel
+(`$learningMode`) dibandingkan dengan beberapa nilai yang sudah diketahui
+pasti (`offline`/`online`/`hybrid`) - beda kasus dengan diskon yang hanya
+dua kondisi bertingkat sebelum default.
+
+Di `process.php`, jika `$errors` tidak kosong, halaman error ditampilkan
+dan `exit` dipanggil - proses perhitungan biaya **tidak dilanjutkan** dengan
+data yang belum valid.
+
+### Looping
+
+| Loop       | Dipakai di                                  | Alasan                              |
+|------------|-----------------------------------------------|--------------------------------------|
+| `foreach`  | opsi kursus, checkbox minat, daftar fasilitas, error list, minat pada ringkasan, tabel history | Membaca seluruh isi array            |
+| `for`      | opsi jumlah paket (1-3) di `register.php`      | Jumlah iterasi sudah diketahui       |
+| `while`    | `loop-lab.php`                                 | Kondisi dicek sebelum blok dijalankan |
+| `do-while` | `loop-lab.php`                                 | Proses minimal harus berjalan sekali |
+
+### Form lanjutan
+
+| Kontrol   | Field              | Catatan                                            |
+|-----------|--------------------|------------------------------------------------------|
+| Radio     | `participant_type` | Satu `name` yang sama → hanya satu nilai terkirim     |
+| Checkbox  | `interests[]`      | Tanda `[]` → PHP menerima sebagai array               |
+| Select    | `course_code`, `learning_mode`, `package_count` | `course_code` & `package_count` dirender dari array/loop |
+| Textarea  | `notes`            | Opsional, `maxlength="300"`                           |
+
+### Validasi fundamental di `process.php`
+
+- Method bukan POST → `header('Location: register.php')` lalu `exit`.
+- `$_POST['interests'] ?? []` mencegah warning *Undefined array key* saat
+  tidak ada checkbox dicentang.
+- `array_intersect($interests, $allowedInterestKeys)` membuang nilai checkbox
+  yang tidak dikenal.
+- `filter_var($email, FILTER_VALIDATE_EMAIL)` untuk validasi format email.
+- `findCourse()` mencari record kursus lewat `foreach` + `return` di helpers.php.
+- Ini **validasi fundamental**, bukan pengganti validasi Laravel yang lengkap
+  (dipelajari setelah pindah ke framework pada Pertemuan 7).
+
+### Contoh perhitungan (dicocokkan dengan test matrix panduan)
+
+| Kursus       | Tipe       | Paket | Subtotal  | Diskon | Total      |
+|--------------|------------|-------|-----------|--------|------------|
+| Web Dasar    | Mahasiswa  | 1     | 300.000   | 20%    | Rp240.000  |
+| PHP Dasar    | Guru       | 1     | 400.000   | 15%    | Rp340.000  |
+| Laravel Dasar| Umum       | 1     | 500.000   | 0%     | Rp500.000  |
+| Web Dasar    | Mahasiswa  | 2     | 600.000   | 20%    | Rp480.000  |
+
+Keempatnya sudah diverifikasi cocok dengan logika `process.php`.
+
+### Mengapa belum pakai database
+
+Pertemuan 6 masih fase PHP fundamental. `history.php` sengaja memakai array
+dummy (`$history`), bukan data nyata - latihan `foreach` sebagai jembatan
+sebelum data sungguhan dari MySQL dipelajari pada fase Laravel (Pertemuan 7+).
+
+### Pengujian wajib
+
+12 skenario ada di `evidence/week-06/test-matrix.txt` (perhitungan total,
+validasi nama/email, minat kosong, 3 minat sekaligus, label metode belajar,
+akses GET langsung ke `process.php`, penambahan fasilitas baru).

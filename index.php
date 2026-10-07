@@ -4,8 +4,10 @@
  * Pemrograman Web III - PHP & MySQL
  *
  * Sejak Pertemuan 5, header/nav/footer memakai kelas dari assets/css/style.css
- * (site-header, nav-wrap, brand, container) agar tampilan konsisten dengan
- * registration.php dan process-registration.php.
+ * (site-header, nav-wrap, brand, container) agar tampilan konsisten di
+ * seluruh proyek. Sejak Pertemuan 6, tombol pendaftaran utama menuju
+ * register.php (form lanjutan dengan percabangan & looping); form versi
+ * Pertemuan 5 (registration.php) tetap tersimpan sebagai evidence lama.
  */
 
 require_once __DIR__ . '/helpers.php';      // 4 function reusable (Milestone 4)
@@ -28,13 +30,15 @@ $year     = date('Y');
 
 <header class="site-header">
   <div class="container nav-wrap">
-    <a class="brand" href="index.php"><?= htmlspecialchars($siteName) ?></a>
+    <a class="brand" href="index.php"><img class="brand-logo" src="assets/images/logo-kursusku.svg" alt=""><span><?= htmlspecialchars($siteName) ?></span></a>
     <nav aria-label="Navigasi utama">
       <a href="#keunggulan">Keunggulan</a>
       <a href="#katalog">Katalog</a>
       <a href="#alur">Cara Daftar</a>
       <a href="fee-calculator.php">Estimasi Biaya</a>
-      <a href="registration.php">Daftar Kursus</a>
+      <a href="register.php">Daftar Kursus</a>
+      <a href="history.php">History</a>
+      <a href="test-matrix.php">Test Matrix</a>
       <a href="#kontak">Kontak</a>
     </nav>
   </div>
@@ -45,7 +49,7 @@ $year     = date('Y');
   <section id="hero">
     <h1><?= htmlspecialchars($tagline) ?></h1>
     <p>Temukan kursus teknologi yang relevan untuk meningkatkan keterampilan Anda.</p>
-    <a href="registration.php">Daftar Sekarang</a>
+    <a href="register.php">Daftar Sekarang</a>
     <a class="secondary" href="fee-calculator.php">Lihat Estimasi Biaya</a>
   </section>
 
@@ -113,7 +117,7 @@ $year     = date('Y');
       <li>Kirim pendaftaran dan tunggu konfirmasi.</li>
     </ol>
     <p style="text-align:center;">
-      <a class="btn-link" href="registration.php">Buka Form Pendaftaran</a>
+      <a class="btn-link" href="register.php">Buka Form Pendaftaran</a>
     </p>
   </section>
 
@@ -145,7 +149,7 @@ $year     = date('Y');
 </main>
 
 <footer class="site-footer">
-  <small>&copy; <?= $year ?> <?= htmlspecialchars($siteName) ?></small>
+  <small>&copy; <?= $year ?> <?= htmlspecialchars($siteName) ?> &middot; <a href="loop-lab.php">Loop Lab</a></small>
 </footer>
 
 </body>

@@ -40,11 +40,12 @@ function e($value): string
 
 <header class="site-header">
   <div class="container nav-wrap">
-    <a class="brand" href="index.php">KursusKu</a>
+    <a class="brand" href="index.php"><img class="brand-logo" src="assets/images/logo-kursusku.svg" alt=""><span>KursusKu</span></a>
     <nav aria-label="Navigasi utama">
       <a href="index.php">Beranda</a>
       <a href="index.php#katalog">Katalog</a>
       <a href="registration.php">Daftar</a>
+      <a href="test-matrix.php">Test Matrix</a>
     </nav>
   </div>
 </header>
