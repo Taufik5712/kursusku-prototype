@@ -1,14 +1,5 @@
 <?php
-/**
- * index.php - Landing Page + Katalog Data-Driven KursusKu (Milestone 2 & 4)
- * Pemrograman Web III - PHP & MySQL
- *
- * Sejak Pertemuan 5, header/nav/footer memakai kelas dari assets/css/style.css
- * (site-header, nav-wrap, brand, container) agar tampilan konsisten di
- * seluruh proyek. Sejak Pertemuan 6, tombol pendaftaran utama menuju
- * register.php (form lanjutan dengan percabangan & looping); form versi
- * Pertemuan 5 (registration.php) tetap tersimpan sebagai evidence lama.
- */
+
 
 require_once __DIR__ . '/helpers.php';      // 4 function reusable (Milestone 4)
 require_once __DIR__ . '/data-courses.php'; // array $courses berisi 6 kursus
